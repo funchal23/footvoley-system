@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: footvolley
+    initial: FTV
+  data:
+    mongodb:
+      uri: mongodb://guest:guest@localhost:27017/FootvolleyDatabase?authSource=admin
+      database: FootvolleyDatabase

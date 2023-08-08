@@ -1,0 +1,20 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:4.2.6
+    container_name: footvolley-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - footvolley-local-db:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: guest
+      MONGO_INITDB_ROOT_PASSWORD: guest
+      MONGO_INITDB_DATABASE: FootvolleyDatabase
+    networks:
+      - footvolley-net
+volumes:
+  footvolley-local-db:
+networks:
+  footvolley-net:
+    driver: bridge
