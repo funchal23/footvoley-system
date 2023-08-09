@@ -16,4 +16,5 @@ public class Athlete {
     @Id
     private String id;
     private String name;
+    private String cpf;
 }

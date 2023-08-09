@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -17,21 +18,18 @@ public class AthleteService {
         return athleteRepository.save(athlete);
     }
 
-    public Athlete findById(String id) throws Exception {
-        return athleteRepository.findById(id).orElseThrow(() -> new Exception(id.toString()));
-    }
-
-    public List<Athlete> findAll() {
-        return athleteRepository.findAll();
+    public List<Athlete> findByIds(Set<String> ids) {
+        return athleteRepository.findAllById(ids);
     }
 
     public void deleteById(String id) {
         athleteRepository.deleteById(id);
     }
 
-    public Athlete update(String id, Athlete athlete) throws Exception {
-        Athlete athleteToUpdate = findById(id);
+    public Athlete update(String id, Athlete athlete) {
+        Athlete athleteToUpdate = athleteRepository.findById(id).orElseThrow(() -> new RuntimeException("Athlete not found"));
         athleteToUpdate.setName(athlete.getName());
+        athleteToUpdate.setCpf(athlete.getCpf());
         return athleteRepository.save(athleteToUpdate);
     }
 }
