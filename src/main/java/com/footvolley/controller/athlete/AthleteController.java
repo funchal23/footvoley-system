@@ -1,6 +1,7 @@
 package com.footvolley.controller.athlete;
 
-import com.footvolley.controller.athlete.dto.AthleteRequest;
+import com.footvolley.controller.athlete.dto.AthleteCreateRequest;
+import com.footvolley.controller.athlete.dto.AthleteUpdateRequest;
 import com.footvolley.controller.athlete.mapper.AthleteMapper;
 import com.footvolley.domain.athlete.Athlete;
 import com.footvolley.service.athlete.AthleteService;
@@ -22,7 +23,7 @@ public class AthleteController {
     private final AthleteMapper mapper;
 
     @PostMapping
-    public ResponseEntity<Athlete> createAthlete(@RequestBody @Valid AthleteRequest athlete){
+    public ResponseEntity<Athlete> createAthlete(@RequestBody @Valid AthleteCreateRequest athlete){
         Athlete athleteCreated = service.create(mapper.toDomain(athlete));
         return ResponseEntity.created(URI.create("/athletes/".concat(athleteCreated.getId()))).body(athleteCreated);
     }
@@ -33,7 +34,7 @@ public class AthleteController {
     }
 
     @PutMapping("/{id}")
-    public Athlete updateAthlete(@PathVariable String id, @RequestBody @Valid AthleteRequest athlete) {
+    public Athlete updateAthlete(@PathVariable String id, @RequestBody @Valid AthleteUpdateRequest athlete) {
         return service.update(id, mapper.toDomain(athlete));
     }
 

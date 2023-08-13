@@ -1,11 +1,16 @@
 package com.footvolley.controller.athlete.mapper;
 
-import com.footvolley.controller.athlete.dto.AthleteRequest;
+import com.footvolley.controller.athlete.dto.AthleteCreateRequest;
+import com.footvolley.controller.athlete.dto.AthleteUpdateRequest;
 import com.footvolley.domain.athlete.Athlete;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", imports = {java.time.LocalDate.class})
 public interface AthleteMapper {
 
-    Athlete toDomain(AthleteRequest athleteRequest);
+    @Mapping(target = "birthDate", expression = "java(LocalDate.parse(createRequest.getBirthDate()))")
+    Athlete toDomain(AthleteCreateRequest createRequest);
+
+    Athlete toDomain(AthleteUpdateRequest updateRequest);
 }

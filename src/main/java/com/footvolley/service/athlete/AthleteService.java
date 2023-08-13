@@ -1,5 +1,7 @@
 package com.footvolley.service.athlete;
 
+import com.footvolley.common.exception.AthleteNotFoundException;
+import com.footvolley.common.exception.CpfFindingException;
 import com.footvolley.dataprovider.repository.AthleteRepository;
 import com.footvolley.domain.athlete.Athlete;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,9 @@ public class AthleteService {
     private final AthleteRepository athleteRepository;
 
     public Athlete create(Athlete athlete) {
+        athleteRepository.findByCpf(athlete.getCpf()).ifPresent(athleteFound -> {
+            throw new CpfFindingException();
+        });
         return athleteRepository.save(athlete);
     }
 
@@ -27,9 +32,9 @@ public class AthleteService {
     }
 
     public Athlete update(String id, Athlete athlete) {
-        Athlete athleteToUpdate = athleteRepository.findById(id).orElseThrow(() -> new RuntimeException("Athlete not found"));
-        athleteToUpdate.setName(athlete.getName());
-        athleteToUpdate.setCpf(athlete.getCpf());
+        Athlete athleteToUpdate = athleteRepository.findById(id).orElseThrow(AthleteNotFoundException::new);
+        athleteToUpdate.setPhoneNumber(athlete.getPhoneNumber());
+        athleteToUpdate.setNickName(athlete.getNickName());
         return athleteRepository.save(athleteToUpdate);
     }
 }
