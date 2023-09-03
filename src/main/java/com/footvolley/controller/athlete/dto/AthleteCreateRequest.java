@@ -1,6 +1,6 @@
 package com.footvolley.controller.athlete.dto;
 
-import com.footvolley.common.validator.dto.constraints.CPF;
+import com.footvolley.common.validator.constraints.CPF;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

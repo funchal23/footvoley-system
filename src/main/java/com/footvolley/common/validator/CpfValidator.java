@@ -1,6 +1,6 @@
-package com.footvolley.common.validator.dto;
+package com.footvolley.common.validator;
 
-import com.footvolley.common.validator.dto.constraints.CPF;
+import com.footvolley.common.validator.constraints.CPF;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import java.util.regex.Pattern;

@@ -1,6 +1,6 @@
-package com.footvolley.common.validator.dto.constraints;
+package com.footvolley.common.validator.constraints;
 
-import com.footvolley.common.validator.dto.CpfValidator;
+import com.footvolley.common.validator.CpfValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
